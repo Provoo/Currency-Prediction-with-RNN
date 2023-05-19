@@ -20,6 +20,28 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
+import ccxt
+
+exchange = ccxt.binance()
+
+# Set the trading pair and timeframe
+symbol = 'BTC/USDT'
+timeframe = '1d'
+
+# Set the start and end timestamps (in milliseconds)
+start_timestamp = exchange.parse8601('2017-01-01T00:00:00Z')
+end_timestamp = exchange.parse8601('2022-01-01T00:00:00Z')
+
+# Fetch OHLCV (Open, High, Low, Close, Volume) data
+ohlcv_data = exchange.fetch_ohlcv(symbol, timeframe, start_timestamp, limit=500)
+
+# Process the OHLCV data as per your requirements
+for data in ohlcv_data:
+    timestamp, open_price, high_price, low_price, close_price, volume = data
+    # Process the data as needed (e.g., store in a CSV file, feed to the model, etc.)
+
+
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
